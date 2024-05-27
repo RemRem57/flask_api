@@ -1,5 +1,5 @@
 # Utilisez l'image Python officielle comme base
-FROM python:3.8-slim
+FROM arm64v8/python:3.8-slim
 
 # Définissez le répertoire de travail dans le conteneur
 WORKDIR /app
