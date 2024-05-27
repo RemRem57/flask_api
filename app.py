@@ -4,11 +4,13 @@ from prometheus_client import Counter, Gauge, start_http_server, generate_latest
 import RPi.GPIO as GPIO
 
 content_type = str('text/plain; version=0.0.4; charset=utf-8')
-GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(10, GPIO.IN,
+           pull_up_down=GPIO.PUD_DOWN)  # Set pin 10 to be an input pin and set initial value to be pulled low (off)
 
 
 def get_temperature():
-    temperature = 25
+    temperature = read_temp()
     temperature = format(temperature, ".2f")
     if all(v is not None for v in [temperature]):  # if all values are not None
         response = {"temperature": temperature}
@@ -19,6 +21,14 @@ def get_temperature():
         temperature = format(temperature, ".2f")
         response = {"temperature": temperature}
         return response
+
+
+def read_temp():
+    # For test return the button state (0 or 1)
+    if GPIO.input(10) == GPIO.HIGH:
+        return 85
+    else:
+        return 25
 
 
 app = Flask(__name__)
