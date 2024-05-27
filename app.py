@@ -1,8 +1,10 @@
 from flask import Flask, Response
 import time
 from prometheus_client import Counter, Gauge, start_http_server, generate_latest
+import RPi.GPIO as GPIO
 
 content_type = str('text/plain; version=0.0.4; charset=utf-8')
+GPIO.setmode(GPIO.BCM)
 
 
 def get_temperature():
