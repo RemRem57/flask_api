@@ -7,3 +7,4 @@ MarkupSafe==2.1.5
 prometheus-client==0.20.0
 Werkzeug==3.0.1
 RPi.GPIO==0.7.1
+w1thermsensor~=2.3.0
